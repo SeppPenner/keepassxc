@@ -41,6 +41,8 @@ parts:
       - libxtst-dev
       - libyubikey-dev
       - libykpers-1-dev
+      - libqhttpengine-dev
+      - libcurl4-openssl-dev
     install: |
       sed -i 's|Icon=keepassxc|Icon=${SNAP}/usr/share/icons/hicolor/256x256/apps/keepassxc.png|g' $SNAPCRAFT_PART_INSTALL/usr/share/applications/org.keepassxc.desktop
     after: [desktop-qt5]

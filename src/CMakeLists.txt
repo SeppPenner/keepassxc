@@ -179,10 +179,6 @@ add_feature_info(KeePassHTTP WITH_XC_HTTP "Browser integration compatible with C
 add_feature_info(YubiKey WITH_XC_YUBIKEY "YubiKey HMAC-SHA1 challenge-response")
 
 add_subdirectory(http)
-if(WITH_XC_HTTP)
-    set(keepasshttp_LIB keepasshttp qhttp Qt5::Network)
-endif()
-
 add_subdirectory(autotype)
 add_subdirectory(cli)
 
@@ -214,14 +210,12 @@ endif()
 add_library(autotype STATIC ${autotype_SOURCES})
 target_link_libraries(autotype Qt5::Core Qt5::Widgets)
 
-set(autotype_LIB autotype)
-
 add_library(keepassx_core STATIC ${keepassx_SOURCES})
 
 set_target_properties(keepassx_core PROPERTIES COMPILE_DEFINITIONS KEEPASSX_BUILDING_CORE)
 target_link_libraries(keepassx_core
-                      ${keepasshttp_LIB}
-                      ${autotype_LIB}
+                      keepasshttp
+                      autotype
                       ${YUBIKEY_LIBRARIES}
                       ${ZXCVBN_LIBRARIES}
                       Qt5::Core
